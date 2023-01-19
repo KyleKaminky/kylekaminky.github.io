@@ -1002,6 +1002,7 @@ section {
     }
 
     body{
+        background: #3D4148;
         position:relative;
         width:100%;
     }
