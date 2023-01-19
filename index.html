@@ -4,10 +4,262 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kyle Kaminky</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css" type="text/css">
+    <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./main.js"></script>
 </head>
-<body>
-  <p> Test</p>
+
+<!-- BODY -->
+<body class="loading">
+    <div class="preloader">
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <div class="ball"></div>
+            <h3>Loading</h3>
+    </div>
     
+    <!-- NAVIGATION BAR -->
+    <header>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#top">Home</a></li>
+                <li><a href="#skills-interests">Interests</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="flex-container">
+    <!-- INTRODUCTION/NAME -->
+    <section class="intro flex-item">
+        <h1 class="name">Kyle Kaminky</h1>
+        <p class="job-title-role">Mission Systems &nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;Software Engineer </p>
+    </section>
+
+    <!-- SKILLS/INTERESTS -->
+    <section class="skills-interests flex-item" id="skills-interests">
+        <h2 class="section-title" data-aos="flip-up" data-aos-offset="250">Skills & Interests</h2>
+        <div class="skill-interest-item-list" >
+            <figure class="skill-interest-item" data-aos="fade-right" data-aos-delay="600">
+                <img class="img1" src="images/noun-signal-white.svg">
+                <figcaption class="caption">RF Systems</figcaption>
+            </figure>
+            <figure class="skill-interest-item" data-aos="fade-right" data-aos-delay="500">
+                <img class="img2" src="images/agile-white.svg">
+                <figcaption class="caption">Software Engineering</figcaption>
+            </figure>
+            <figure class="skill-interest-item" data-aos="fade-right" data-aos-delay="400">
+                <img class = "img3" src="images/neural-net-white.svg">
+                <figcaption class="caption">Machine Learning</figcaption>
+            </figure>
+            <figure class="skill-interest-item" data-aos="fade-right" data-aos-delay="300">
+                <img class="img4" src="images/visualization-white.svg">
+                <figcaption class="caption">Animations & Visualizations</figcaption>
+            </figure>
+            <figure class="skill-interest-item" data-aos="fade-right" data-aos-delay="200">
+                <img class="img5" src="images/sine-white.svg">
+                <figcaption class="caption">Signals</figcaption>
+            </figure>
+            <figure class="skill-interest-item" data-aos="fade-right" data-aos-delay="100">
+                <img class="img6" src="images/mentoring-white.svg">
+                <figcaption class="caption">Mentoring</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- WORK EXPERIENCE -->
+    <section class="experience flex-item" id="experience">
+        <h2 class="section-title" data-aos="flip-up" data-aos-offset="250">Professional Experience</h2>
+        <div class="experience-list">
+            <div class="experience-item experience-item-1" data-aos="fade-left">
+                <img src="images/satellite-white.svg">
+                <h3 class="experience-item-1-title experience-title">Software & Systems Engineer | Ball Aerospace<br>2019 - Present</h3>
+                <ul class="experience-item-1-info experience-info">
+                    <li>Authored MATLAB and Python programs to perform end-to-end RF mission modeling and architecture trades for proposed satellite constellations and RF hardware 
+                    </li>
+                    <li>As Responsible engineer for calculating system-level link budgets, evaluated sensitivity requirements across a variety of exemplar signals
+                    </li>
+                    <li>Performed project planning and task assigning using Atlassian tool suite with an agile workflow.</li>
+                </ul>
+            </div>
+            <div class="line" data-aos="fade-in"></div>
+            <div class="experience-item experience-item-2" data-aos="fade-right">
+                <img src="images/flag-white.svg">
+                <h3 class="experience-item-2-title experience-title">Signals Analyst | Department of Defense<br>2016 - 2019</h3>
+                <ul class="experience-item-2-info experience-info">
+                    <li>RF signals analysis of radar and communication systems in the time and 
+                        frequency domains</li>
+                    <li>Rapid, technical intelligence support to special military operations</li>
+                    <li>Coursework in radar theory, communications protocols 
+                        and waveforms, network exploitation, and telecommunications</li>
+                     <li>Analyzed digital network intelligence through complex database queries</li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="education flex-item" id="education">
+        <h2 class="section-title" data-aos="flip-up" data-aos-offset="250">Education</h2>
+        <div class="education-list">
+            <div class="education-card" data-aos="zoom-in-left" data-aos-delay="100">
+                <div class="education-card-inner">
+                    <div class="education-card-front mines-card-front">
+                        <img src="images/mines-white.jpeg">
+                    </div>
+                    <div class="education-card-back mines-card-back">
+                        <h2><u>B.S. Electrical Engineering</u></h2>
+                        <h2>3.8 GPA</h2>
+                        <h3>Area of Special Interest: Computer Science</h3>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="education-card" data-aos="zoom-in-left" data-aos-delay="100">
+                <div class="education-card-inner">
+                    <div class="education-card-front jhu-card-front">
+                        <img src="images/jhu.png">
+                    </div>
+                    <div class="education-card-back jhu-card-back">
+                        <h2><u>Graduate Coursework</u></h2>
+                        
+                        <h2>4.0 GPA</h2>
+                        <ul>
+                        <li><span>Communication Systems Engineering</span></li>
+                        <li><span>SATCOM Systems</span></li>
+                        </ul>
+                    </div>
+                  </div>
+            </div>
+            
+            <div class="education-card" data-aos="zoom-in-left" data-aos-delay="100">
+                <div class="education-card-inner">
+                    <div class="education-card-front coursera-card-front">
+                        <img src="images/coursera.png">
+                    </div>
+                    <div class="education-card-back coursera-card-back">
+                      <h2><u>Deep Learning Specialization</u></h2>
+                      <ul>
+                        <li><span>Neural Networks and Deep Learning</span></li>
+                        <li><span>Structuring ML Projects</span></li>
+                        <li><span>Improving Deep Neural Networks</span></li>
+                        <li><span>Convolutional Neural Networks</span></li>
+                        </ul>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects flex-item" id="projects">
+        <h2 class="section-title" data-aos="flip-up" data-aos-offset="250">Projects</h2>
+        <div class="project-list">
+            <div class="project-item project-item-left" data-aos="fade-left">
+                <img src="images/BinaryClock.gif" class="animation">
+                <img src="images/BinaryClock-static.png" class="cover">
+                <div class="project-description">
+                    <h3 class="project-item-left-title">Educational Animations and Visualizations</h3>
+                    <p class="project-item-left-info project-info">My personality type is Enneagram 5 - and if you don’t know what the 
+                        <a href="https://www.enneagraminstitute.com/how-the-enneagram-system-works">Enneagram</a> is, that basically means I LOVE learning. And because I love learning so much, 
+                        that means I also love teaching others and helping them learn. I’ve always wanted to make 
+                        visualizations and never knew the best programming language. I discovered <a href="https://processing.org/">Processing</a> and fell in love. 
+                        While my wife studied for the PE exam, I spent hours making educational animations and 
+                        visualizations. I hope to spend more time on this someday! But because she’s done studying now, 
+                        I spend that time with her :) 
+                    </p>
+                </div>
+            </div>
+            <div class="line" data-aos="fade-in"></div>
+            <div class="project-item project-item-right" data-aos="fade-right">
+                
+                <div class="project-description">
+                <h3 class="project-item-right-title">Kaggle March Madness Machine Learning Competition</h3>
+                <p class="project-item-right-info project-info">
+                    After completing the Coursera Deep Learning courses I put my skills to the test and
+                    participated in the March Madness Competition on kaggle. I ended up finishing in the 
+                    top 3%! I also made a jupyter notebook talking about my approach and some of the project
+                    details.
+                </p>
+            </div>
+            <img src="images/kaggle-mm-competition.png">
+            </div>
+            <div class="line" data-aos="fade-in"></div>
+            <div class="project-item project-item-left" data-aos="fade-left">
+                <img src="images/benchy.png">
+                <div class="project-description">
+                <h3 class="project-item-left-title">3D Printing</h3>
+                <p class="project-item-left-info project-info">
+                    My first real exposure to 3D printing was when I started working at Ball Aerospace. Once
+                    I saw the capabilities and amazing things they could make, I decided to buy one. I purchased
+                    the Ender3Pro and have really enjoyed it. I have designed and numerous pieces, my favorite being
+                    a custom built controller for a remote control crane. 
+                </p>
+            </div>
+            </div>
+            <div class="line" data-aos="fade-in"></div>
+            <div class="project-item project-item-right" data-aos="fade-right">
+                
+                <div class="project-description">
+                <h3 class="project-item-right-title">Software Defined Radio</h3>
+                <p class="project-item-right-info project-info">
+                    I got my first SDR shortly after graduating college and really enjoy tinkering
+                    around with them, doing signal surveys and analysis. My first SDR was the RTL - SDR
+                    , which is a receive only device. I now have two HackRF One's which are capable of
+                    transmitting as well, which gets a lot more interesting! I attended the 2022 GRCon,
+                    was inspired, and performed a replay attack on my wireless ceiling fan.
+                </p>
+            </div>
+            <img src="images/replay_attack_test.gif" class="animation">
+            <img src="images/SDR_new_size.png" class="cover sdr-cover">
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact flex-item" id="contact">
+        <h2 class="section-title" data-aos="flip-up" data-aos-offset="250">Contact</h2>
+        <div class="contact-item-list">
+            <a class="contact-item" data-aos="flip-up" href="https://www.linkedin.com/in/kyle-kaminky-0b38701b9/"><img src="images/LinkedIn_icon.svg"></a>
+            <a class="contact-item" data-aos="flip-up" href="https://github.com/KyleKaminky"><img src="images/github-mark-white.svg"></a>
+            <a class="contact-item" data-aos="flip-up" href="https://forms.gle/v2Ln1kDijQq48qHW7"><img src="images/form-32AB8E.svg"></a>
+            
+        </div>
+    </section>
+
+    <!-- MOBILE NOTE -->
+    <section class="flex-item">
+        <h2 class="mobile-note section-title" data-aos="flip-up" data-aos-offset="150">For more details, please view this page on a desktop computer.</h2>
+    </section>
+
+    </div>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <ul class="footer-items">
+            <li>Written in HTML, CSS, and Javascript</li>
+            <li><a class="scripture-link" href="https://www.gotquestions.org/who-is-Jesus.html">Psalm 8: 3-4</a></li>
+            <li>Photograph by my talented friend, <a href="http://nickneumannphoto.com/">Nick Neumann</a></li>
+        </ul>
+    </footer>
+    <script>
+        AOS.init({
+            duration:2000,
+            anchorPlacement: 'bottom-bottom',
+            offset: 200
+        });
+      </script>
 </body>
 </html>
