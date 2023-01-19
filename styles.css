@@ -780,9 +780,12 @@ section {
         opacity: 1;
     }
 
+    .animation {
+        display: none;
+    }
 
     .cover {
-        display: none;
+        position: static;
     }
 
     .contact-item:hover img{
@@ -961,10 +964,12 @@ section {
     .project-info {
         display: none;
     }
-
+    .animation {
+        display: none;
+    }
 
     .cover {
-        display: none;
+        position: static;
     }
 
     .contact-item:hover img{
