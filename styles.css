@@ -4,6 +4,7 @@
 :root {
     --flex-container-margin: 350px;
     --text-color: #edf0f1;
+    --background-color: #24262A;
 }
 
 * {
@@ -15,7 +16,7 @@
     font-size: 1em;
 }
 
-body{
+body {
     text-align: center;
     background: url("images/background_tiny.jpg");
     background-color: rgba(0,0,0,0.5);
@@ -27,25 +28,32 @@ body{
     line-height: 1.6;
 }
 
+section {
+    scroll-margin-top: 75px;
+}
+
+/* ------------------------
+        PRELOADER
+-------------------------- */
 
 .loading {
     overflow: hidden;
 }
 
-
 .preloader {
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background-color: #24262A;
+    background-color: var(--background-color);
     background-position: center;
     transition: opacity 0.5s ease;
  }
  
 .preloader {
-	
-	padding-top: var(--flex-container-margin);
 	margin: 0 auto;
 }
 
@@ -54,52 +62,46 @@ body{
 	height: 10px;
 	margin: 10px auto;
 	border-radius: 50px;
+    background: var(--text-color);
 }
 
 .ball:nth-child(1) {
-	background: #ffffff;
 	-webkit-animation: right 1s infinite ease-in-out;
 	-moz-animation: right 1s infinite ease-in-out;
 	animation: right 1s infinite ease-in-out;
 }
 
 .ball:nth-child(2) {
-	background: #ffffff;
 	-webkit-animation: left 1.1s infinite ease-in-out;
 	-moz-animation: left 1.1s infinite ease-in-out;
 	animation: left 1.1s infinite ease-in-out;
 }
 
 .ball:nth-child(3) {
-	background: #ffffff;
 	-webkit-animation: right 1.05s infinite ease-in-out;
 	-moz-animation: right 1.05s infinite ease-in-out;
 	animation: right 1.05s infinite ease-in-out;
 }
 
 .ball:nth-child(4) {
-	background: #ffffff;
 	-webkit-animation: left 1.15s infinite ease-in-out;
 	-moz-animation: left 1.15s infinite ease-in-out;
 	animation: left 1.15s infinite ease-in-out;
 }
 
 .ball:nth-child(5) {
-	background: #ffffff;
 	-webkit-animation: right 1.1s infinite ease-in-out;
 	-moz-animation: right 1.1s infinite ease-in-out;
 	animation: right 1.1s infinite ease-in-out;
 }
 
 .ball:nth-child(6) {
-	background: #ffffff;
 	-webkit-animation: left 1.05s infinite ease-in-out;
 	-moz-animation: left 1.05s infinite ease-in-out;
 	animation: left 1.05s infinite ease-in-out;
 }
 
 .ball:nth-child(7) {
-	background: #ffffff;
 	-webkit-animation: right 1s infinite ease-in-out;
 	-moz-animation: right 1s infinite ease-in-out;
 	animation: right 1s infinite ease-in-out;
@@ -177,12 +179,13 @@ body{
 	}
 }
 
-
-
-
  .preloader-finish {
     display: none;
  }
+
+ /* ------------------------
+        NAV BAR
+-------------------------- */
 
 header {
     text-align: center;
@@ -190,7 +193,7 @@ header {
 
 .nav-links {
     list-style: none;
-    background-color: #24262A;
+    background-color: var(--background-color);
     height: 50px;
     position:fixed;
     top:0;
@@ -219,6 +222,9 @@ header {
     padding-bottom: 3px;
 }
 
+/* ------------------------
+        PAGE FLEX
+-------------------------- */
 .flex-container {
     display:flex;
     flex-direction: column;
@@ -236,9 +242,27 @@ header {
     margin-bottom: 0px;
 }
 
+.section-title {
+    padding: 10px;
+    background-color: rgba(36, 38, 42, 0.5);
+    border-radius: 7px;
+    text-align: center;
+    width: 400px;
+    margin: 0 auto;
+}
 
+.line {
+    background-color: var(--text-color);
+    height: 1px;
+    width: 900px;
+    margin: 0 auto;
+}
+
+/* ------------------------
+        INTRO
+-------------------------- */
 .intro {
-    color:#edf0f1;
+    color:var(--text-color);
     text-align: center;
     animation: fadeInAnimation ease-in-out 2s;
     border: 1px solid white;
@@ -269,14 +293,9 @@ header {
     }
 }
 
-.section-title {
-    padding: 10px;
-    background-color: rgba(36, 38, 42, 0.5);
-    border-radius: 7px;
-    text-align: center;
-    width: 400px;
-    margin: 0 auto;
-}
+/* ------------------------
+    SKILLS & INTERESTS
+-------------------------- */
 
 .skill-interest-item-list {
     display: grid;
@@ -300,15 +319,12 @@ header {
 .skill-interest-item .img1 {
     background-color: #E9EB9E;
 }
-
 .skill-interest-item .img2 {
     background-color: #8CD780;
 }
-
 .skill-interest-item .img3 {
     background-color: #32AB8E;
 }
-
 .skill-interest-item .img4 {
     background-color: #087C83;
 }
@@ -323,20 +339,13 @@ header {
     font-size: 0.9em;
 }
 
-
+/* ------------------------
+        EXPERIENCE
+-------------------------- */
 
 .experience li {
     list-style-position: inside;
     margin: 10px auto;
-}
-
-
-
-.line {
-    background-color: white;
-    height: 1px;
-    width: 900px;
-    margin: 0 auto;
 }
 
 .experience-item {
@@ -381,6 +390,9 @@ header {
     grid-row: 2;
 }
 
+/* ------------------------
+        EDUCATION
+-------------------------- */
 
 .education-list {
     display: grid;
@@ -393,15 +405,14 @@ header {
 .education-card {
     background-color: transparent;
     height: 200px;
-    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    perspective: 1000px; 
 }
 
 .education-card img {
-width: 100%;
-border-radius: 7px;
+    width: 100%;
+    border-radius: 7px;
 }
 
-/* This container is needed to position the front and back side */
 .education-card-inner {
     position: relative;
     width: 100%;
@@ -411,23 +422,20 @@ border-radius: 7px;
     transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
 .education-card:hover .education-card-inner {
 transform: rotateY(180deg);
 }
 
-/* Position the front and back side */
 .education-card-front, .education-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 7px;
     font-size: 0.8em;
 }
 
-/* Style the front side (fallback if image is missing) */
 .mines-card-front {
     background-color: #21304D;
 }
@@ -440,33 +448,23 @@ transform: rotateY(180deg);
     background-color: #0056D2;
 }
 
-/* Style the back side */
 .education-card-back {
-    
     transform: rotateY(180deg);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 10px;
-    
+    background-color: #2A4E5E;
 }
 
 .education-card-back ul {
     list-style-position: inside;
 }
 
-.mines-card-back {
-    background-color: #2A4E5E;
-}
-
-.jhu-card-back {
-    background-color: #2A4E5E;
-}
-
-.coursera-card-back {
-    background-color: #2A4E5E;
-}
+/* ------------------------
+        PROJECTS
+-------------------------- */
 
 .project-list {
     display: flex;
@@ -537,6 +535,9 @@ transform: rotateY(180deg);
     opacity: 0;
 }
 
+/* ------------------------
+        CONTACT ME
+-------------------------- */
 
 .contact-item-list {
     display: grid;
@@ -561,13 +562,21 @@ transform: rotateY(180deg);
     width: 100%;
 }
 
+/* ------------------------
+        MOBILE NOTE
+-------------------------- */
+
 .mobile-note {
     display: none;
 }
 
+/* ------------------------
+        FOOTER
+-------------------------- */
+
 .footer {
     list-style: none;
-    background-color: #24262A;
+    background-color: var(--background-color);
     height: 75px;
     padding: 10px;
     display: flex;
@@ -578,7 +587,7 @@ transform: rotateY(180deg);
 
 .footer-items {
     list-style: none;
-    background-color: #24262A;
+    background-color: var(--background-color);
     width: 100%;
     z-index: 300;
     font-size: 0.7em;
@@ -605,84 +614,9 @@ transform: rotateY(180deg);
     padding-bottom: 3px;
 }
 
-section {
-    scroll-margin-top: 75px;
-}
-
-/*
-@media screen and (max-width: 1100px) {
-    * {
-    
-    }
-
-    .flex-container {
-        width: 100%;
-    }
-
-    .flex-item {
-        width: 100%;
-    }
-
-    .line {
-        width: 90%;
-    }
-
-    .intro {
-        width: 80%;
-    }
-
-    .section-title {
-        width: 50%;
-    }
-
-    .skill-interest-item-list{
-        grid-template-columns: repeat(3, 1fr);
-        width: 60%;
-        grid-gap: 30px;
-    }
-
-    .experience-item {
-        width: 90%;
-        grid-template-columns: 1fr;
-        padding: 10px;
-        justify-items: center;
-        align-items: center;
-    }
-    
-   
-    .education {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border: 1px solid blue;
-    }
-
-    .education-list {
-        width: 70%;
-        grid-gap: 5%;
-    }
-
-    .education-card {
-        display: flex;
-        height: 100%;
-    }
-
-    .education-card:hover .education-card-inner {
-        transform: none;
-    }
-
-    .education-card-front {
-        position: static;
-        height: 100%;
-    }
-
-    .education-card-back {
-        display: none;
-    }
-}
-*/
-
-
+/* ------------------------
+   Breakpoint for tablets
+-------------------------- */
 @media only screen and (max-width: 1100px) {
     /* Remove fixed positioning on navigation */
     .navbar {
@@ -831,9 +765,15 @@ section {
     html {
         width: 100%;
     }
+
+    .flex-item:last-of-type {
+        margin-bottom: 100px;
+    }
 }
 
-
+/* ------------------------
+   Breakpoint for mobile
+-------------------------- */
 @media only screen and (max-width: 600px) {
     /* Remove fixed positioning on navigation */
 
@@ -1018,7 +958,4 @@ section {
     .flex-item:last-of-type {
         margin-bottom: 100px;
     }
-
-    
-    
 }
