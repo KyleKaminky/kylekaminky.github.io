@@ -240,7 +240,7 @@ header {
 .intro {
     color:#edf0f1;
     text-align: center;
-    animation: fadeInAnimation ease-in-out 4s;
+    animation: fadeInAnimation ease-in-out 2s;
     border: 1px solid white;
     border-radius: 7px;
     width: 800px;
