@@ -14,6 +14,6 @@ window.addEventListener('load', () => {
   setTimeout( function() {
       preload.classList.add('preloader-finish');
       loading.classList.remove('loading');
-  }, 2000 );
+  }, 0 );
 });
 

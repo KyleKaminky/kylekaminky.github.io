@@ -17,7 +17,7 @@
 
 body{
     text-align: center;
-    background: url("images/NJN_3641.jpg");
+    background: url("images/background_tiny.jpg");
     background-color: rgba(0,0,0,0.5);
     background-blend-mode: darken;
     background-attachment: fixed;
@@ -1007,7 +1007,6 @@ section {
     }
 
     body{
-        background: #3D4148;
         position:relative;
         width:100%;
     }
