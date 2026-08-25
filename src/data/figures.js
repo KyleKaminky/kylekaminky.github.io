@@ -40,7 +40,7 @@ export const FIGS = [
   { id: 'ook', num: '04', title: 'On-off keying', domain: 'Communications',
     blurb: 'The simplest modulation: the carrier is switched fully on or fully off.',
     notes: ['In wireless communication systems, information — typically a series of 1s and 0s — is modulated onto some carrier signal. Modulation means varying some property of the carrier to imprint this information.', 'On-off keying is one of the simplest modulation types. It varies the amplitude, either completely on or off.'],
-    params: [{ key: 'bits', label: 'Bits on screen', min: 4, max: 16, step: 1, def: 8 }, { key: 'carrier', label: 'Carrier cycles per bit', min: 2, max: 20, step: 1, def: 8 }, { key: 'speed', label: 'Bit rate', min: 5, max: 120, step: 5, def: 40 }],
+    params: [{ key: 'bits', label: 'Bits on screen', min: 4, max: 12, step: 1, def: 8 }, { key: 'carrier', label: 'Carrier cycles per bit', min: 1, max: 10, step: 1, def: 6 }, { key: 'speed', label: 'Bit rate', min: 1, max: 12, step: 1, def: 3, unit: ' bits/s' }],
     video: 'https://www.youtube.com/watch?v=Ax4JNUpdoDA', source: 'https://github.com/KyleKaminky/OOK' },
   { id: 'generative', num: '05', title: 'Generative art', domain: 'Algorithms',
     blurb: 'Algorithms and mathematics as a drawing hand — a harmonograph stand-in until the port lands.',

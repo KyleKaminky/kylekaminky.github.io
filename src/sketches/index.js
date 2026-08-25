@@ -7,12 +7,14 @@
 */
 
 import binary from './binary.js';
+import ook from './ook.js';
 import orbits from './orbits.js';
 import signal from './signal.js';
 import placeholder from './placeholder.js';
 
 export const SKETCHES = {
   binary,
+  ook,
   orbits,
   signal,
 };

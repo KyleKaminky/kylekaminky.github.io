@@ -74,6 +74,7 @@ src/
     signal.js           Signal Types, ported from SignalTypes.pde
     orbits.js           Satellite Orbits, ported from Orbits.pde
     binary.js           Binary Clock, ported from BinaryClock.pde
+    ook.js              On-Off Keying, ported from OOK.pde
     placeholder.js      shown for figures not yet ported
     palettes.js         light (index cards) and dark (figure sheets)
     lib.js              shared label / dash / sizing helpers
@@ -99,7 +100,7 @@ slider. **Adding an animation is two edits:**
 2. Add `src/sketches/<id>.js` and register it in `src/sketches/index.js`.
 
 No layout code changes. A figure with no sketch registered automatically renders the
-placeholder and shows as `Video · porting` — which is how the eight un-ported figures
+placeholder and shows as `Video · porting` — which is how the seven un-ported figures
 behave right now. Un-ported sheets hide their parameter sliders, since only a ported
 sketch reads them.
 
@@ -136,11 +137,11 @@ would otherwise melt a laptop.
 | #  | Figure                        | State           |
 |----|-------------------------------|-----------------|
 | 02 | Binary clock                  | Ported          |
+| 04 | On-off keying                 | Ported          |
 | 07 | Signal types                  | Ported          |
 | 09 | Satellite orbits              | Ported          |
 | 01 | Introduction                  | Video · porting |
 | 03 | Estimating π by Monte Carlo   | Video · porting |
-| 04 | On-off keying                 | Video · porting |
 | 05 | Generative art                | Video · porting |
 | 06 | Birthday paradox simulator    | Video · porting |
 | 08 | Counting                      | Video · porting |
