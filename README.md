@@ -17,12 +17,47 @@ npm run preview    # serve the built output
 npm run lint
 ```
 
+## Branches
+
+| Branch | What it is |
+|---|---|
+| `main` | What GitHub Pages currently serves — still the old jQuery résumé site |
+| `p5-site` | This site. Where the work happens. **Not published yet.** |
+
+Pushing to `p5-site` is deliberately inert. The deploy workflow only fires on `main`,
+and the repo's Pages source is still set to build from the branch, so nothing can go
+live by accident.
+
 ## Deploying
 
-`npm run deploy` builds and pushes `dist/` to the `main` branch of
-[`figuring-things-out.github.io`](https://github.com/figuring-things-out/figuring-things-out.github.io),
-which is the GitHub Pages organisation site. The live URL does not change, and the
-pre-p5 site stays in that repo's history.
+Nothing is published yet. When it is time:
+
+1. Merge `p5-site` into `main`.
+2. Switch the repo's Pages source to **GitHub Actions**
+   (Settings → Pages → Build and deployment → Source).
+3. Push `main`. `.github/workflows/deploy.yml` builds and publishes.
+
+**Order matters.** The repo root `index.html` is a Vite entry point, not a servable
+page. If `main` is pushed while Pages is still building from the branch, the live site
+breaks until the source is switched.
+
+### The site this replaced
+
+The original kylekaminky.github.io — a jQuery + AOS résumé site — is preserved in this
+repo's history, tagged **`v1-resume-site`**:
+
+```sh
+git show v1-resume-site:index.html      # read it
+git checkout v1-resume-site -- .        # restore it into the working tree
+```
+
+### The other site
+
+`figuring-things-out.github.io` belongs to a **separate GitHub account** Kyle made to
+claim a second free user site. It is still live and untouched, serving its own
+hand-written YouTube-embed version, which lives in that repo's own history — not this
+one. Consolidating here means that account is no longer on the critical path; pointing
+the old URL at this one is a one-file redirect whenever it is worth doing.
 
 ## How it is put together
 
@@ -37,6 +72,7 @@ src/
   sketches/
     index.js            figure id -> sketch factory
     signal.js           Signal Types, ported from SignalTypes.pde
+    orbits.js           Satellite Orbits, ported from Orbits.pde
     placeholder.js      shown for figures not yet ported
     palettes.js         light (index cards) and dark (figure sheets)
     lib.js              shared label / dash / sizing helpers
@@ -47,6 +83,8 @@ src/
     ParamSlider.jsx     Blueprint.jsx  Nav.jsx  Footer.jsx
   views/                index, projects, writing, resume, about
   data/resume.js        experience, education, skills, contact
+  data/sections.js      which sections are switched on — nav, routing and views
+                        all read this, so enabling one is a single flag
   ds/styles.css         the Industry design system — do not edit, it is the source of truth
   site.css              layout only; every colour and font reads from a token
 ```
@@ -60,8 +98,9 @@ slider. **Adding an animation is two edits:**
 2. Add `src/sketches/<id>.js` and register it in `src/sketches/index.js`.
 
 No layout code changes. A figure with no sketch registered automatically renders the
-placeholder and shows as `Video · porting` — which is how the ten un-ported figures
-behave right now.
+placeholder and shows as `Video · porting` — which is how the nine un-ported figures
+behave right now. Un-ported sheets hide their parameter sliders, since only a ported
+sketch reads them.
 
 ### Porting a sketch
 
@@ -117,3 +156,6 @@ The Processing originals live in their own repos under
 Built from a design handoff: an "Industry" blueprint design system (square corners,
 hairline frames, registration marks, Barlow Condensed) plus a full spec for all five
 views. `src/ds/styles.css` is that system, copied in verbatim and treated as read-only.
+
+Only the figure index is switched on at the moment; Projects, Writing, Résumé and About
+are built but disabled in `src/data/sections.js`.
