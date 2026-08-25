@@ -18,7 +18,8 @@ export default function FigureSheet({ figure, getParam, setParam, resetFigure, n
   const i = FIGS.indexOf(figure);
   const prev = FIGS[(i - 1 + FIGS.length) % FIGS.length];
   const next = FIGS[(i + 1) % FIGS.length];
-  const status = isPorted(figure.id) ? 'Live' : 'Video · porting';
+  const ported = isPorted(figure.id);
+  const status = ported ? 'Live' : 'Video · porting';
 
   return (
     <div className="sheet-wrap">
@@ -50,17 +51,35 @@ export default function FigureSheet({ figure, getParam, setParam, resetFigure, n
 
             <hr className="rail-rule" />
 
-            <div className="rail-label rail-label-params">Parameters — live</div>
-            <div className="param-list">
-              {figure.params.map((param) => (
-                <ParamSlider
-                  key={param.key}
-                  param={param}
-                  value={getParam(param.key)}
-                  onChange={(v) => setParam(param.key, v)}
-                />
-              ))}
-            </div>
+            {/*
+              Only a ported sketch reads its parameters. Showing the sliders for
+              a figure still running the placeholder would give the visitor
+              controls that quietly do nothing.
+            */}
+            {ported ? (
+              <>
+                <div className="rail-label rail-label-params">Parameters — live</div>
+                <div className="param-list">
+                  {figure.params.map((param) => (
+                    <ParamSlider
+                      key={param.key}
+                      param={param}
+                      value={getParam(param.key)}
+                      onChange={(v) => setParam(param.key, v)}
+                    />
+                  ))}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="rail-label rail-label-params">Not yet ported</div>
+                <p className="rail-note rail-note-first">
+                  This one still exists only as the original Processing sketch and the
+                  produced video. It will run live here, with parameters, once the port
+                  lands.
+                </p>
+              </>
+            )}
 
             <div className="rail-actions">
               <a className="btn btn-secondary" href={figure.video} target="_blank" rel="noreferrer">
@@ -69,15 +88,19 @@ export default function FigureSheet({ figure, getParam, setParam, resetFigure, n
               <a className="btn btn-ghost" href={figure.source} target="_blank" rel="noreferrer">
                 View source
               </a>
-              <button className="btn btn-ghost" type="button" onClick={resetFigure}>
-                Reset
-              </button>
+              {ported && (
+                <button className="btn btn-ghost" type="button" onClick={resetFigure}>
+                  Reset
+                </button>
+              )}
             </div>
           </div>
         </div>
 
         <div className="sheet-foot">
-          Originally animated in Processing for the channel · ported to p5.js — parameters are yours to break.
+          {ported
+            ? 'Originally animated in Processing for the channel · ported to p5.js — parameters are yours to break.'
+            : 'Originally animated in Processing for the channel · the p5.js port is still in progress.'}
         </div>
       </Blueprint>
 

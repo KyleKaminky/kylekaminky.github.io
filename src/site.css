@@ -473,3 +473,6 @@ a { color: inherit; text-decoration: none; }
   .plate-head-title { flex-basis: 100%; }
   .plate-head-cell { border-left: 0; }
 }
+
+/* First note in the rail sits directly under its label. */
+.rail-note-first { margin-top: 8px; }
