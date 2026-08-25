@@ -8,16 +8,17 @@
 
      #/                    index of figures
      #/figures/signal      one figure sheet
-     #/projects  #/writing  #/resume  #/about
+     #/projects  #/writing  #/resume  #/about   (as enabled in data/sections.js)
 */
 
 import { useEffect, useState } from 'react';
 import { figById } from './data/figures.js';
+import { isEnabled } from './data/sections.js';
 
 function parse(hash) {
   const path = hash.replace(/^#\/?/, '').replace(/\/$/, '');
   if (path === '') return { view: 'index' };
-  if (['projects', 'writing', 'resume', 'about'].includes(path)) return { view: path };
+  if (isEnabled(path)) return { view: path };
 
   const match = path.match(/^figures\/(.+)$/);
   if (match && figById(match[1])) return { view: 'figure', figId: match[1] };

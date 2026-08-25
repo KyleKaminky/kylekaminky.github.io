@@ -10,6 +10,7 @@ import AboutView from './views/AboutView.jsx';
 import useRoute from './useRoute.js';
 import useParams from './useParams.js';
 import { figById } from './data/figures.js';
+import { isEnabled } from './data/sections.js';
 
 // Below this the sheet stacks to one column and its canvas gets shorter.
 const NARROW = 900;
@@ -52,10 +53,10 @@ export default function App() {
             resetFigure={() => resetFigure(figure.id)}
           />
         )}
-        {route.view === 'projects' && <ProjectsView />}
-        {route.view === 'writing' && <WritingView />}
-        {route.view === 'resume' && <ResumeView />}
-        {route.view === 'about' && <AboutView getParam={getParam} />}
+        {route.view === 'projects' && isEnabled('projects') && <ProjectsView />}
+        {route.view === 'writing' && isEnabled('writing') && <WritingView />}
+        {route.view === 'resume' && isEnabled('resume') && <ResumeView />}
+        {route.view === 'about' && isEnabled('about') && <AboutView getParam={getParam} />}
       </main>
       <Footer />
     </>
