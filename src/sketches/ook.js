@@ -172,27 +172,34 @@ export default function ook({ get, palette, height, container }) {
     /*
        The original's block diagram, kept but moved into the gutter: the message
        and the carrier meet at a mixer, and the mixer feeds the output.
+
+       The mixer sits below both inputs, between the carrier row and the output
+       row. That placement is not cosmetic. Put it between the message and the
+       carrier — as this first did — and the carrier taps the trunk below the
+       multiplier, so the diagram says the carrier reaches the output without
+       being multiplied by anything, which is precisely the claim the symbol
+       exists to deny.
     */
     function drawMixer() {
       const mx = panelX - p.width * GUTTER * 0.42;
-      const my = (rowCy[0] + rowCy[1]) / 2;
+      const my = (rowCy[1] + rowCy[2]) / 2;
       const r = Math.min(p.width * GUTTER * 0.2, rowH * 0.26);
       const stub = 10;
+      const a = Math.min(8, r * 0.7);
 
       p.stroke(palette.faint);
       p.strokeWeight(1);
       p.line(mx, rowCy[0], mx, rowCy[2]);
-      p.line(mx, rowCy[0], panelX - stub, rowCy[0]);
-      p.line(mx, rowCy[1], panelX - stub, rowCy[1]);
-      p.line(mx, rowCy[2], panelX - stub, rowCy[2]);
+      for (const cy of rowCy) p.line(mx, cy, panelX - stub, cy);
 
-      // Arrow into the output row
-      const a = Math.min(8, r * 0.7);
-      p.fill(palette.faint);
       p.noStroke();
+      p.fill(palette.faint);
+
+      // Flow into the mixer, and out of it into the output row
+      p.triangle(mx, my - r, mx - a / 2, my - r - a, mx + a / 2, my - r - a);
       p.triangle(panelX - stub, rowCy[2], panelX - stub - a, rowCy[2] - a / 2, panelX - stub - a, rowCy[2] + a / 2);
 
-      // The mixer itself, masking the line it sits on
+      // The mixer itself, masking the trunk it sits on
       p.fill(palette.bg);
       p.stroke(palette.faint);
       p.circle(mx, my, r * 2);
