@@ -65,7 +65,7 @@ export const FIGS = [
   { id: 'orbits', num: '09', title: 'Satellite orbits', domain: 'Orbital mechanics',
     blurb: 'Lower orbits fly faster; the geosynchronous orbit matches Earth\u2019s rotation.',
     notes: ['Depending on the purpose, satellites orbit the earth in different ways. A satellite may fly lower in altitude which means at higher speeds, or at higher altitudes resulting in lower speeds.', 'The geosynchronous (GEO) orbit is a unique orbit that actually matches the earth\u2019s rotation. GEO satellites appear to not move and provide constant coverage over one point on the earth.'],
-    params: [{ key: 'alt', label: 'Altitude', min: 200, max: 35786, step: 1, def: 550, unit: ' km' }, { key: 'speed', label: 'Simulation speed', min: 1, max: 400, step: 1, def: 80, unit: '\u00d7' }],
+    params: [{ key: 'alt', label: 'Altitude', min: 200, max: 35786, step: 1, def: 550, unit: ' km' }, { key: 'speed', label: 'Simulation speed', min: 1, max: 400, step: 1, def: 80, unit: ' min/s' }],
     video: 'https://www.youtube.com/watch?v=stUOQkc_clU', source: 'https://github.com/KyleKaminky/Orbits' },
   { id: 'keypad', num: '10', title: 'Keypad circuit', domain: 'Circuits',
     blurb: 'Row/column scanning — how a calculator or garage keypad knows which key you pressed.',

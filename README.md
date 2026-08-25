@@ -95,6 +95,7 @@ would otherwise melt a laptop.
 | #  | Figure                        | State           |
 |----|-------------------------------|-----------------|
 | 07 | Signal types                  | Ported          |
+| 09 | Satellite orbits              | Ported          |
 | 01 | Introduction                  | Video · porting |
 | 02 | Binary clock                  | Video · porting |
 | 03 | Estimating π by Monte Carlo   | Video · porting |
@@ -102,7 +103,6 @@ would otherwise melt a laptop.
 | 05 | Generative art                | Video · porting |
 | 06 | Birthday paradox simulator    | Video · porting |
 | 08 | Counting                      | Video · porting |
-| 09 | Satellite orbits              | Video · porting |
 | 10 | Keypad circuit                | Video · porting |
 | 11 | AM / FM                       | Video · porting |
 

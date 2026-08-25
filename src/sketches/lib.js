@@ -54,3 +54,25 @@ export function dashed(p, pattern, draw) {
 export function labelSizeFor(height) {
   return height < 300 ? 10 : 12;
 }
+
+/*
+   Trace weight and marker size are absolute for the same reason label sizes
+   are. Scaled proportionally, a trace becomes a fat ribbon on a 540px sheet and
+   a hairline on a 196px card, and markers that read well large disappear small.
+*/
+export function traceWeightFor(height) {
+  return height < 300 ? 1.5 : 2;
+}
+
+export function markerSizeFor(height) {
+  return Math.min(10, Math.max(5.5, height * 0.019));
+}
+
+/*
+   Whether there is room for the supporting apparatus — readouts, ring labels,
+   axis labels. Index cards are 196px tall and only have room for the drawing
+   itself; sheets are 540px and carry the full annotation.
+*/
+export function isDetailed(height) {
+  return height >= 300;
+}

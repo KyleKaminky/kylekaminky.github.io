@@ -17,7 +17,9 @@
    1100px reference rather than as bare numbers.
 */
 
-import { labelStyle, clearTracking, dashed, labelSizeFor } from './lib.js';
+import {
+  labelStyle, clearTracking, dashed, labelSizeFor, traceWeightFor, markerSizeFor,
+} from './lib.js';
 
 const MAX_WAVES = 9;        // how many sinusoids are summed into the message
 const REF_BAND_HALF = 175;  // (1100/2 - 200) / 2 — the original's band half-height
@@ -25,16 +27,6 @@ const MARGIN_X = 0.15;
 const MARGIN_Y = 0.16;
 const WAVE_BAND = 0.8;      // fraction of the band the quantiser spans
 const THETA_STEP = 0.02;    // 'angular velocity' — how fast the wave slides
-
-/*
-   Trace weight and marker size are absolute, not proportional — for the same
-   reason label sizes are. A trace scaled to a 540px sheet becomes a fat ribbon,
-   and one scaled to a 196px card disappears. The analog and digital traces
-   share a weight deliberately: they are the same signal drawn two ways, so any
-   difference in weight would read as a difference in meaning.
-*/
-const traceWeightFor = (h) => (h < 300 ? 1.5 : 2);
-const markerSizeFor = (h) => Math.min(10, Math.max(5.5, h * 0.019));
 
 export default function signal({ get, palette, height, container }) {
   return (p) => {
