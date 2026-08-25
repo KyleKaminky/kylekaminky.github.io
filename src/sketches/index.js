@@ -6,11 +6,13 @@
    state on the index and the sheet.
 */
 
+import binary from './binary.js';
 import orbits from './orbits.js';
 import signal from './signal.js';
 import placeholder from './placeholder.js';
 
 export const SKETCHES = {
+  binary,
   orbits,
   signal,
 };
