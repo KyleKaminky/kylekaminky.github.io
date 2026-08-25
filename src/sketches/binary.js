@@ -22,16 +22,22 @@ const ROWS = 4;                    // bits in a ones-place column: 8 4 2 1
 const TENS_ROWS = 3;               // a tens digit never exceeds 5
 const GROUPS = ['HOURS', 'MINUTES', 'SECONDS'];
 const COLUMNS = GROUPS.length * 2; // a tens and a ones column per group
-const EASE = 0.18;                 // how quickly a bit settles after it flips
+const TRANSITION_MS = 200;         // how long a bit takes to flip, start to finish
+const MAX_STEP_MS = 100;           // clamp after the sketch has been paused offscreen
+
+// Smoothstep, so a flip starts and ends gently instead of at a constant rate.
+const smooth = (t) => t * t * (3 - 2 * t);
 
 const bitValue = (row) => 8 >> row; // row 0 is the most significant
 
 export default function binary({ get, palette, height, container }) {
   return (p) => {
-    // Eased on-ness per bit, [column][row], so flips ripple rather than snap
+    // Transition progress per bit, [column][row], so flips ripple rather than
+    // snap. Linear from 0 to 1 over TRANSITION_MS, eased only when drawn.
     const level = Array.from({ length: COLUMNS }, () => new Float32Array(ROWS));
 
     let cx, cy, colGap, groupGap, rowStep, bitD, size, detailed;
+    let offColor, onColor; // resolved once — lerpColor on strings every frame is wasteful
 
     function layout() {
       cx = p.width / 2;
@@ -70,6 +76,8 @@ export default function binary({ get, palette, height, container }) {
       p.pixelDensity(Math.min(window.devicePixelRatio, 2));
       p.frameRate(30);
       p.ellipseMode(p.CENTER);
+      offColor = p.color(palette.ghost);
+      onColor = p.color(palette.accent);
       layout();
       p.describe(
         'A clock showing hours, minutes and seconds as columns of binary bits, ' +
@@ -97,31 +105,40 @@ export default function binary({ get, palette, height, container }) {
       drawBits();
     };
 
+    /*
+       Move each bit toward its target at a fixed rate, so a flip takes the same
+       200ms every time and lands exactly on 0 or 1.
+
+       This was originally an exponential ease, which was wrong twice over: it
+       approaches its target asymptotically, so a bit turning off faded quickly
+       and then lingered as a barely-tinted dot for a long tail before crossing
+       a cutoff and vanishing outright.
+    */
     function updateLevels(digits) {
+      const step = Math.min(p.deltaTime, MAX_STEP_MS) / TRANSITION_MS;
       for (let col = 0; col < COLUMNS; col++) {
         for (let row = rowsFor(col); row < ROWS; row++) {
-          const on = (digits[col] & bitValue(row)) !== 0 ? 1 : 0;
-          level[col][row] += (on - level[col][row]) * EASE;
+          const target = (digits[col] & bitValue(row)) !== 0 ? 1 : 0;
+          const v = level[col][row];
+          const delta = target - v;
+          level[col][row] = Math.abs(delta) <= step ? target : v + Math.sign(delta) * step;
         }
       }
     }
 
+    /*
+       One circle per bit, at a constant size, changing only colour — the same
+       thing the original did with ON_COLOR and OFF_COLOR. Size is deliberately
+       not animated: a bit that shrinks on its way out reads as a third state
+       rather than as off.
+    */
     function drawBits() {
       p.noStroke();
       for (let col = 0; col < COLUMNS; col++) {
         const x = columnX(col);
         for (let row = rowsFor(col); row < ROWS; row++) {
-          const v = level[col][row];
-          const y = rowY(row);
-
-          // An off bit is a hollow socket; an on bit fills it.
-          p.fill(palette.ghost);
-          p.circle(x, y, bitD);
-
-          if (v > 0.01) {
-            p.fill(p.lerpColor(p.color(palette.ghost), p.color(palette.accent), v));
-            p.circle(x, y, bitD * (0.55 + 0.45 * v));
-          }
+          p.fill(p.lerpColor(offColor, onColor, smooth(level[col][row])));
+          p.circle(x, rowY(row), bitD);
         }
       }
     }
