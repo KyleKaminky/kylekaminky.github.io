@@ -26,6 +26,16 @@ const MARGIN_Y = 0.16;
 const WAVE_BAND = 0.8;      // fraction of the band the quantiser spans
 const THETA_STEP = 0.02;    // 'angular velocity' — how fast the wave slides
 
+/*
+   Trace weight and marker size are absolute, not proportional — for the same
+   reason label sizes are. A trace scaled to a 540px sheet becomes a fat ribbon,
+   and one scaled to a 196px card disappears. The analog and digital traces
+   share a weight deliberately: they are the same signal drawn two ways, so any
+   difference in weight would read as a difference in meaning.
+*/
+const traceWeightFor = (h) => (h < 300 ? 1.5 : 2);
+const markerSizeFor = (h) => Math.min(10, Math.max(5.5, h * 0.019));
+
 export default function signal({ get, palette, height, container }) {
   return (p) => {
     // --- wave state ---
@@ -37,7 +47,7 @@ export default function signal({ get, palette, height, container }) {
     // --- layout, all recomputed on resize ---
     let cx, cy, mx, my, bandHalf, topMid, botMid;
     let xL0, spanL, stepL, xR0, spanR, n;
-    let size, dotR, circR, sideLabels;
+    let size, traceWeight, markerSize, sideLabels;
 
     function layout() {
       cx = p.width / 2;
@@ -67,8 +77,8 @@ export default function signal({ get, palette, height, container }) {
       stepL = spanL / (n - 1);
       ys = new Float32Array(n);
 
-      dotR = Math.max(1.5, p.height * 0.006);
-      circR = Math.max(3, p.height * 0.012);
+      traceWeight = traceWeightFor(p.height);
+      markerSize = markerSizeFor(p.height);
     }
 
     function seed() {
@@ -92,7 +102,8 @@ export default function signal({ get, palette, height, container }) {
       seed();
       p.describe(
         'Four quadrants showing the same wave as analog and digital signals, ' +
-        'each in continuous and discrete form.'
+        'each in continuous and discrete form. The digital row is drawn over a ' +
+        'grid of the quantization levels its values are restricted to.'
       );
     };
 
@@ -103,10 +114,13 @@ export default function signal({ get, palette, height, container }) {
     };
 
     p.draw = function () {
+      // Resolved once per frame and shared: both the level grid and the two
+      // digital quadrants have to agree on exactly where the levels are.
+      const q = quantiser();
       p.background(palette.bg);
-      drawAxes();
+      drawAxes(q);
       calcWave();
-      renderWave();
+      renderWave(q);
     };
 
     function calcWave() {
@@ -127,38 +141,43 @@ export default function signal({ get, palette, height, container }) {
     }
 
     /*
-       The quantiser step depends only on the slider, so it is resolved once per
-       frame and passed down. Reading get() inside the point loop — as the first
-       draft did — meant a few hundred redundant lookups every frame.
+       The quantiser depends only on the slider, so it is resolved once per frame
+       rather than per point. It hands back its geometry as well as the snap
+       function, because the level grid has to be drawn on exactly the values
+       snap() produces — multiples of step — or the samples would float just off
+       the lines they are supposed to be sitting on.
     */
     function quantiser() {
       const levels = Math.max(2, Math.round(get('levels')));
       const a = bandHalf * WAVE_BAND;
       const step = (2 * a) / levels;
-      return (y) => p.constrain(Math.round(y / step) * step, -a, a);
+      return {
+        step,
+        top: Math.floor(a / step), // highest level index, so the grid matches snap()
+        snap: (y) => p.constrain(Math.round(y / step) * step, -a, a),
+      };
     }
 
-    function renderWave() {
-      const q = quantiser();
-
+    function renderWave(q) {
       // --- Left column: continuous ---
-      // Drawn as points rather than filled circles: same look, one path instead
-      // of several hundred, which matters with eleven canvases on the index.
+      // Both traces carry the same weight: one signal, drawn two ways. The only
+      // difference the eye should pick up is smooth versus stepped.
+      p.noFill();
+      p.strokeWeight(traceWeight);
+
+      // Analog, continuous
       p.stroke(palette.accent);
-      p.strokeWeight(dotR * 2);
-      p.beginShape(p.POINTS);
+      p.beginShape();
       for (let i = 0; i < n; i++) p.vertex(xL0 + i * stepL, topMid + ys[i]);
       p.endShape();
 
-      // Digital, continuous — a stepped trace through the quantised values
+      // Digital, continuous — the same wave held at the nearest level
       p.stroke(palette.ink);
-      p.strokeWeight(1.5);
-      p.noFill();
       p.beginShape();
-      for (let i = 0; i < n; i++) p.vertex(xL0 + i * stepL, botMid + q(ys[i]));
+      for (let i = 0; i < n; i++) p.vertex(xL0 + i * stepL, botMid + q.snap(ys[i]));
       p.endShape();
 
-      // --- Right column: the same wave, sampled ---
+      // --- Right column: the same wave, sampled at instants ---
       const rate = Math.max(2, Math.round(get('rate')));
       p.strokeWeight(1);
       for (let k = 0; k < rate; k++) {
@@ -166,33 +185,54 @@ export default function signal({ get, palette, height, container }) {
         const idx = Math.min(n - 1, Math.round(t * (n - 1)));
         const x = xR0 + t * spanR;
 
-        // Analog, discrete — a stem to the sampled value
+        // Analog, discrete — the sample lands wherever the wave was
         const ay = topMid + ys[idx];
         p.stroke(palette.accent);
         p.line(x, topMid, x, ay);
-        p.circle(x, ay, circR * 2);
+        p.circle(x, ay, markerSize);
 
-        // Digital, discrete — the same instant, quantised
-        const dy = botMid + q(ys[idx]);
+        // Digital, discrete — the same instant, pulled onto a level line
+        const dy = botMid + q.snap(ys[idx]);
         p.stroke(palette.ink);
         p.line(x, botMid, x, dy);
-        p.circle(x, dy, circR * 2);
+        p.circle(x, dy, markerSize);
       }
     }
 
-    function drawAxes() {
+    /*
+       The quantization levels, drawn across the digital row only.
+
+       This is the whole lesson made visible: a digital signal can only sit at
+       certain values of Y. Without the grid the bottom-right quadrant is nearly
+       indistinguishable from the top-right one — the samples move by at most
+       half a step, which at six levels is about one marker across. With it, the
+       digital samples visibly rest on lines while the analog ones float free,
+       and the Quantization levels slider has something to visibly act on.
+    */
+    function drawLevels(q) {
+      p.stroke(palette.ghost);
+      p.strokeWeight(1);
+      for (let k = -q.top; k <= q.top; k++) {
+        const y = botMid + k * q.step;
+        p.line(xL0, y, xL0 + spanL, y);
+        p.line(xR0, y, xR0 + spanR, y);
+      }
+    }
+
+    function drawAxes(q) {
       p.stroke(palette.ghost);
       p.strokeWeight(1);
       p.line(mx, cy, p.width - mx, cy);
       p.line(cx, my, cx, p.height - my);
 
-      // Zero line for each of the four quadrants
+      // Analog row: just a zero line, because an analog signal has no levels
       dashed(p, [3, 4], () => {
         p.line(xL0, topMid, xL0 + spanL, topMid);
-        p.line(xL0, botMid, xL0 + spanL, botMid);
         p.line(xR0, topMid, xR0 + spanR, topMid);
-        p.line(xR0, botMid, xR0 + spanR, botMid);
       });
+
+      // Digital row: the levels themselves
+      drawLevels(q);
 
       p.noStroke();
       p.fill(palette.faint);
