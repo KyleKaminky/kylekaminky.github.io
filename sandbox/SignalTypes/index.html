@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Types | Figuring Things Out</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1/lib/p5.min.js"></script>
+    <script src="sketch.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background: #111;
+            color: #EEE5E9;
+            font-family: "Montserrat", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 { font-weight: 600; margin: 0 0 8px; }
+        p.description { max-width: 640px; text-align: center; line-height: 1.5; color: #b9b2b6; font-weight: 300; }
+
+        /* The sketch draws at 1100x1100 and the browser scales the canvas down
+           to fit, so every hard-coded coordinate in sketch.js still lines up. */
+        .sketch { width: 100%; max-width: 640px; aspect-ratio: 1 / 1; }
+        .sketch canvas { width: 100% !important; height: 100% !important; display: block; }
+    </style>
+</head>
+<body>
+
+    <h1>Signal Types</h1>
+    <p class="description">Analog signals can be of any Y value, and digital signals can only be at
+        certain &ldquo;levels&rdquo; of Y values. Discrete signals only have values at certain time
+        steps, and continuous signals have values across all time.</p>
+
+    <div class="sketch" id="signal-types"></div>
+
+    <script>
+        // Wait for Montserrat before starting, otherwise the first frames get
+        // drawn in the fallback font and the labels visibly jump when it lands.
+        document.fonts.load('25px Montserrat').then(start, start);
+
+        function start() {
+            // Mount the sketch, and only run it while it is actually on screen. With a
+            // page full of animations this is what keeps the frame rate up.
+            const sketch = new p5(signalTypes, 'signal-types');
+
+            new IntersectionObserver((entries) => {
+                entries.forEach(e => e.isIntersecting ? sketch.loop() : sketch.noLoop());
+            }, { threshold: 0 }).observe(document.getElementById('signal-types'));
+        }
+    </script>
+
+</body>
+</html>
