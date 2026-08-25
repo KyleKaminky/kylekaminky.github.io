@@ -1,7 +1,7 @@
-# Figuring Things Out
+# kylekaminky.github.io
 
-The site for [Figuring Things Out](https://figuring-things-out.github.io) — educational
-STEM animations by Kyle Kaminky.
+Kyle Kaminky's site: educational STEM animations, projects, writing and résumé, all in
+one place.
 
 The animations were originally written in **Processing** and published as YouTube videos.
 This site ports them to **p5.js** so every one of them runs live in the browser, with real
@@ -45,7 +45,8 @@ src/
     FigureCard.jsx      one figure on the index grid
     FigureSheet.jsx     one figure, large, with sliders
     ParamSlider.jsx     Blueprint.jsx  Nav.jsx  Footer.jsx
-  views/                index, projects, writing, about
+  views/                index, projects, writing, resume, about
+  data/resume.js        experience, education, skills, contact
   ds/styles.css         the Industry design system — do not edit, it is the source of truth
   site.css              layout only; every colour and font reads from a token
 ```

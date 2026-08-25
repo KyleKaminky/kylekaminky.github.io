@@ -5,6 +5,7 @@ import FigureSheet from './components/FigureSheet.jsx';
 import IndexView from './views/IndexView.jsx';
 import ProjectsView from './views/ProjectsView.jsx';
 import WritingView from './views/WritingView.jsx';
+import ResumeView from './views/ResumeView.jsx';
 import AboutView from './views/AboutView.jsx';
 import useRoute from './useRoute.js';
 import useParams from './useParams.js';
@@ -33,8 +34,8 @@ export default function App() {
 
   useEffect(() => {
     document.title = figure
-      ? `Fig. ${figure.num} — ${figure.title} | Figuring Things Out`
-      : 'Figuring Things Out';
+      ? `Fig. ${figure.num} — ${figure.title} | Kyle Kaminky`
+      : 'Kyle Kaminky';
   }, [figure]);
 
   return (
@@ -53,6 +54,7 @@ export default function App() {
         )}
         {route.view === 'projects' && <ProjectsView />}
         {route.view === 'writing' && <WritingView />}
+        {route.view === 'resume' && <ResumeView />}
         {route.view === 'about' && <AboutView getParam={getParam} />}
       </main>
       <Footer />

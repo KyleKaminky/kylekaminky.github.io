@@ -8,7 +8,8 @@ export default function ProjectsView() {
       <hr className="rule kicker-rule" />
       <h1>Projects</h1>
       <p className="sub-lede">
-        Hardware, software, signal processing and teaching — the work that is not an animation.
+        Hardware, signals, machine learning and the odd printed object — the work that
+        is not an animation.
       </p>
 
       <div className="project-grid">
@@ -18,6 +19,7 @@ export default function ProjectsView() {
             <h2 className="project-title">{p.title}</h2>
             <p className="project-blurb">{p.blurb}</p>
             <span className="tag tag-outline">{p.tag}</span>
+            {p.href && <a className="project-link" href={p.href}>See the figures →</a>}
           </Blueprint>
         ))}
       </div>

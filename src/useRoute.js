@@ -8,7 +8,7 @@
 
      #/                    index of figures
      #/figures/signal      one figure sheet
-     #/projects  #/writing  #/about
+     #/projects  #/writing  #/resume  #/about
 */
 
 import { useEffect, useState } from 'react';
@@ -17,7 +17,7 @@ import { figById } from './data/figures.js';
 function parse(hash) {
   const path = hash.replace(/^#\/?/, '').replace(/\/$/, '');
   if (path === '') return { view: 'index' };
-  if (path === 'projects' || path === 'writing' || path === 'about') return { view: path };
+  if (['projects', 'writing', 'resume', 'about'].includes(path)) return { view: path };
 
   const match = path.match(/^figures\/(.+)$/);
   if (match && figById(match[1])) return { view: 'figure', figId: match[1] };

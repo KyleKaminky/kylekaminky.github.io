@@ -4,15 +4,19 @@ const LINKS = [
   ['#/', 'Figures'],
   ['#/projects', 'Projects'],
   ['#/writing', 'Writing'],
+  ['#/resume', 'Résumé'],
   ['#/about', 'About'],
 ];
 
 export default function Nav({ view }) {
-  const active = { index: '#/', figure: '#/', projects: '#/projects', writing: '#/writing', about: '#/about' }[view];
+  const active = {
+    index: '#/', figure: '#/', projects: '#/projects',
+    writing: '#/writing', resume: '#/resume', about: '#/about',
+  }[view];
 
   return (
     <header className="nav">
-      <a className="nav-brand" href="#/">Figuring Things Out</a>
+      <a className="nav-brand" href="#/">Kyle Kaminky</a>
       <nav className="nav-links">
         {LINKS.map(([href, label]) => (
           <a key={href} href={href} className={href === active ? 'is-active' : undefined}>
