@@ -208,9 +208,14 @@ export default function signal({ get, palette, height, container }) {
        half a step, which at six levels is about one marker across. With it, the
        digital samples visibly rest on lines while the analog ones float free,
        and the Quantization levels slider has something to visibly act on.
+
+       Drawn in the palette's grid role so they read as measurement rather than
+       as more of the construction scaffolding the quadrant dividers are made of.
     */
     function drawLevels(q) {
-      p.stroke(palette.ghost);
+      // grid, not ghost: these lines are the point of the digital row, and must
+      // not read as the same kind of mark as the quadrant dividers.
+      p.stroke(palette.grid);
       p.strokeWeight(1);
       for (let k = -q.top; k <= q.top; k++) {
         const y = botMid + k * q.step;

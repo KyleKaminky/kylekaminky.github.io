@@ -77,7 +77,9 @@ export default function mySketch({ get, palette, height, container, figure }) {
 - **`palette`** is handed in because every sketch renders on two grounds: white index
   cards and the dark field of a sheet. Never hard-code a colour. Roles are `bg`, `ink`
   (readouts), `accent` (the live trace), `faint` (secondary labels), `ghost`
-  (construction lines).
+  (construction lines — axes, dividers) and `grid` (measurement grids that carry
+  meaning). `ghost` and `grid` are separate on purpose: scaffolding should recede,
+  a line that means something should not.
 - **`height`** is fixed per context (196 card / 540 sheet / 260 about); **width is
   whatever the container is.** Lay out proportionally. `signal.js` shows the pattern:
   keep the original's hand-tuned constants as ratios of the 1100px canvas it was tuned
