@@ -75,6 +75,7 @@ src/
     orbits.js           Satellite Orbits, ported from Orbits.pde
     binary.js           Binary Clock, ported from BinaryClock.pde
     ook.js              On-Off Keying, ported from OOK.pde
+    counting.js         Counting, ported from Counting.pde
     placeholder.js      shown for figures not yet ported
     palettes.js         light (index cards) and dark (figure sheets)
     lib.js              shared label / dash / sizing helpers
@@ -100,7 +101,7 @@ slider. **Adding an animation is two edits:**
 2. Add `src/sketches/<id>.js` and register it in `src/sketches/index.js`.
 
 No layout code changes. A figure with no sketch registered automatically renders the
-placeholder and shows as `Video · porting` — which is how the seven un-ported figures
+placeholder and shows as `Video · porting` — which is how the six un-ported figures
 behave right now. Un-ported sheets hide their parameter sliders, since only a ported
 sketch reads them.
 
@@ -138,13 +139,13 @@ would otherwise melt a laptop.
 |----|-------------------------------|-----------------|
 | 02 | Binary clock                  | Ported          |
 | 04 | On-off keying                 | Ported          |
+| 08 | Counting                      | Ported          |
 | 07 | Signal types                  | Ported          |
 | 09 | Satellite orbits              | Ported          |
 | 01 | Introduction                  | Video · porting |
 | 03 | Estimating π by Monte Carlo   | Video · porting |
 | 05 | Generative art                | Video · porting |
 | 06 | Birthday paradox simulator    | Video · porting |
-| 08 | Counting                      | Video · porting |
 | 10 | Keypad circuit                | Video · porting |
 | 11 | AM / FM                       | Video · porting |
 
@@ -152,6 +153,22 @@ The Processing originals live in their own repos under
 [github.com/KyleKaminky](https://github.com/KyleKaminky) and locally in `~/Projects/FTO`.
 
 `sandbox/` holds earlier loose p5.js experiments — see `sandbox/README.md`.
+
+## Related: the Motion Canvas repo
+
+`~/Documents/ChatGPT/MotionCanvasPlayground` holds Motion Canvas scenes for the YouTube
+videos, in the same visual language — its `src/styles/theme.ts` uses the same tokens as
+`ds/styles.css`, so a video and the interactive figure of the same concept look like
+siblings without anyone maintaining a mapping.
+
+The division of labour is **interaction versus narration**. Motion Canvas is a timeline:
+a scene plays a scripted sequence and ends, which is what a video is. These sketches run
+indefinitely and read their parameters every frame, which is what a figure someone can
+drag is. Neither substitutes for the other, and Motion Canvas scenes are deliberately
+not embedded here — that would mean shipping a second animation runtime for content that
+cannot respond to the sliders.
+
+`counting.js` takes its structure from that repo's `radix-counting.tsx`.
 
 ## Design
 
