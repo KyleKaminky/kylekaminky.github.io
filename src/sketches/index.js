@@ -6,6 +6,7 @@
    state on the index and the sheet.
 */
 
+import amfm from './amfm.js';
 import binary from './binary.js';
 import birthday from './birthday.js';
 import counting from './counting.js';
@@ -16,6 +17,7 @@ import signal from './signal.js';
 import placeholder from './placeholder.js';
 
 export const SKETCHES = {
+  amfm,
   binary,
   birthday,
   counting,

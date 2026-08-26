@@ -78,6 +78,7 @@ src/
     counting.js         Counting, ported from Counting.pde
     monte.js            Estimating Pi by Monte Carlo, ported from MonteCarloPi.pde
     birthday.js         Birthday Paradox, ported from BirthdayParadox.pde
+    amfm.js             AM / FM, ported from AMFM.pde
     placeholder.js      shown for figures not yet ported
     palettes.js         light (index cards) and dark (figure sheets)
     lib.js              shared label / dash / sizing helpers
@@ -103,7 +104,7 @@ slider. **Adding an animation is two edits:**
 2. Add `src/sketches/<id>.js` and register it in `src/sketches/index.js`.
 
 No layout code changes. A figure with no sketch registered automatically renders the
-placeholder and shows as `Video · porting` — which is how the four un-ported figures
+placeholder and shows as `Video · porting` — which is how the three un-ported figures
 behave right now. Un-ported sheets hide their parameter sliders, since only a ported
 sketch reads them.
 
@@ -143,13 +144,13 @@ would otherwise melt a laptop.
 | 04 | On-off keying                 | Ported          |
 | 03 | Estimating π by Monte Carlo   | Ported          |
 | 06 | Birthday paradox simulator    | Ported          |
+| 11 | AM / FM                       | Ported          |
 | 08 | Counting                      | Ported          |
 | 07 | Signal types                  | Ported          |
 | 09 | Satellite orbits              | Ported          |
 | 01 | Introduction                  | Video · porting |
 | 05 | Generative art                | Video · porting |
 | 10 | Keypad circuit                | Video · porting |
-| 11 | AM / FM                       | Video · porting |
 
 The Processing originals live in their own repos under
 [github.com/KyleKaminky](https://github.com/KyleKaminky) and locally in `~/Projects/FTO`.
