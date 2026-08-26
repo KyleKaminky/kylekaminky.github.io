@@ -30,6 +30,21 @@ import {
 
 const MAX_STEP_MS = 100;
 const HISTORY = 7;          // how many past values stay on screen
+
+/*
+   Pacing is expressed as seconds per count, and one second is the floor.
+
+   The asymmetry is deliberate. Running faster than a count per second teaches
+   nothing — it just outruns reading, and speed is not a property of a number
+   system the way quantization levels or carrier cycles are properties of their
+   figures. Running slower does help: it gives you time to read a rollover
+   propagate across the columns. So the fast end is pinned at one per second,
+   which also reads as a clock, and the slider only opens downward from there.
+
+   Seconds per count rather than counts per second keeps the slider on whole
+   numbers; a rate slider would have to step in fractions.
+*/
+const MIN_PERIOD = 1;       // seconds per count, at the fast end
 const MARGIN_X = 0.03;
 
 const BASES = [
@@ -109,8 +124,8 @@ export default function counting({ get, palette, height, container }) {
       p.background(palette.bg);
 
       const top = Math.max(2, Math.round(get('top')));
-      const rate = Math.max(0.2, get('speed'));
-      count += (Math.min(p.deltaTime, MAX_STEP_MS) / 1000) * rate;
+      const period = Math.max(MIN_PERIOD, Math.round(get('period')));
+      count += Math.min(p.deltaTime, MAX_STEP_MS) / 1000 / period;
 
       const span = top + 1;
       const n = Math.floor(count) % span;

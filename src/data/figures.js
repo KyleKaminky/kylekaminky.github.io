@@ -60,7 +60,7 @@ export const FIGS = [
   { id: 'counting', num: '08', title: 'Counting', domain: 'Number systems',
     blurb: 'The same count in decimal, binary, octal and hex — only the symbol count changes.',
     notes: ['The most common way to count uses 10 symbols, which is also called the decimal system. But computers and much other technology use different systems — such as binary, octal, and hexadecimal.', 'What really matters and makes these different is the number of symbols. The concept of counting does not change, only the number of symbols used.'],
-    params: [{ key: 'speed', label: 'Count rate', min: 1, max: 20, step: 1, def: 4, unit: ' /s' }, { key: 'top', label: 'Count to', min: 16, max: 512, step: 16, def: 256 }],
+    params: [{ key: 'period', label: 'Seconds per count', min: 1, max: 6, step: 1, def: 1, unit: ' s' }, { key: 'top', label: 'Count to', min: 16, max: 512, step: 16, def: 16 }],
     video: 'https://www.youtube.com/watch?v=6DrFBTl9vWU', source: 'https://github.com/KyleKaminky/Counting' },
   { id: 'orbits', num: '09', title: 'Satellite orbits', domain: 'Orbital mechanics',
     blurb: 'Lower orbits fly faster; the geosynchronous orbit matches Earth\u2019s rotation.',
