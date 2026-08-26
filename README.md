@@ -77,6 +77,7 @@ src/
     ook.js              On-Off Keying, ported from OOK.pde
     counting.js         Counting, ported from Counting.pde
     monte.js            Estimating Pi by Monte Carlo, ported from MonteCarloPi.pde
+    birthday.js         Birthday Paradox, ported from BirthdayParadox.pde
     placeholder.js      shown for figures not yet ported
     palettes.js         light (index cards) and dark (figure sheets)
     lib.js              shared label / dash / sizing helpers
@@ -102,7 +103,7 @@ slider. **Adding an animation is two edits:**
 2. Add `src/sketches/<id>.js` and register it in `src/sketches/index.js`.
 
 No layout code changes. A figure with no sketch registered automatically renders the
-placeholder and shows as `Video · porting` — which is how the five un-ported figures
+placeholder and shows as `Video · porting` — which is how the four un-ported figures
 behave right now. Un-ported sheets hide their parameter sliders, since only a ported
 sketch reads them.
 
@@ -141,12 +142,12 @@ would otherwise melt a laptop.
 | 02 | Binary clock                  | Ported          |
 | 04 | On-off keying                 | Ported          |
 | 03 | Estimating π by Monte Carlo   | Ported          |
+| 06 | Birthday paradox simulator    | Ported          |
 | 08 | Counting                      | Ported          |
 | 07 | Signal types                  | Ported          |
 | 09 | Satellite orbits              | Ported          |
 | 01 | Introduction                  | Video · porting |
 | 05 | Generative art                | Video · porting |
-| 06 | Birthday paradox simulator    | Video · porting |
 | 10 | Keypad circuit                | Video · porting |
 | 11 | AM / FM                       | Video · porting |
 

@@ -50,7 +50,7 @@ export const FIGS = [
   { id: 'birthday', num: '06', title: 'Birthday paradox simulator', domain: 'Probability',
     blurb: 'In 23 random people there is a 50% chance two share a birthday. Watch it happen.',
     notes: ['Did you know, in a group of only 23 random people, there is a 50% chance that two of them have the same birthday?', 'This is called the birthday paradox and is based on the pigeonhole principle found in probability and statistics. The animation performs rounds of the experiment by generating random birthdays and looking for a match.'],
-    params: [{ key: 'group', label: 'Group size', min: 5, max: 60, step: 1, def: 23 }, { key: 'speed', label: 'Draw rate', min: 1, max: 30, step: 1, def: 6 }],
+    params: [{ key: 'group', label: 'Group size', min: 5, max: 60, step: 1, def: 23 }, { key: 'speed', label: 'Draw rate', min: 1, max: 60, step: 1, def: 10, unit: ' /s' }],
     video: 'https://www.youtube.com/watch?v=CJInW0bYiOk', source: 'https://github.com/KyleKaminky/BirthdayParadox' },
   { id: 'signal', num: '07', title: 'Signal types', domain: 'Signal processing',
     blurb: 'Analog vs digital, continuous vs discrete — the four combinations side by side.',

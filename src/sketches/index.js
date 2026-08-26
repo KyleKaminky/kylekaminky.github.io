@@ -7,6 +7,7 @@
 */
 
 import binary from './binary.js';
+import birthday from './birthday.js';
 import counting from './counting.js';
 import monte from './monte.js';
 import ook from './ook.js';
@@ -16,6 +17,7 @@ import placeholder from './placeholder.js';
 
 export const SKETCHES = {
   binary,
+  birthday,
   counting,
   monte,
   ook,
