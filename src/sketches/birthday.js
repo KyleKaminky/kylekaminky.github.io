@@ -12,6 +12,15 @@
    23 and the observed rate settles near a half, which is the fact the figure
    exists to demonstrate, and no single round can show it.
 
+   Every trial fills the whole group rather than stopping at the first match,
+   which is where this differs from the original. The question being asked is
+   whether a group of n shares a birthday, and that needs all n people placed.
+   A consequence worth knowing: a group often shares more than one day, so more
+   than one marked collision is normal rather than a glitch. At a group of 23,
+   27% of the groups that match share two days or more; at 40 it is 70%, and at
+   60 it is 96%. The SHARED DAYS readout counts them, so the markers on the
+   calendar always have something to be read against.
+
    Alongside the calendar is the exact curve,
 
        P(n) = 1 - (365/365)(364/365)...((365-n+1)/365)
@@ -205,6 +214,7 @@ export default function birthday({ get, palette, height, container }) {
       const rows = [
         ['GROUP SIZE', String(group)],
         ['PEOPLE PLACED', String(drawn.length)],
+        ['SHARED DAYS', String(matched.size)],
         ['THEORY', `${(theory * 100).toFixed(1)}%`],
         ['TRIALS', String(trials)],
         ['WITH A MATCH', String(matches)],
@@ -216,7 +226,7 @@ export default function birthday({ get, palette, height, container }) {
       const lineH = size * 1.8;
       let y = gridY;
       rows.forEach(([label, value], i) => {
-        const lit = i === 2 || i === 5;
+        const lit = i === 3 || i === 6;
         p.fill(lit ? palette.accent : palette.faint);
         p.textAlign(p.LEFT, p.TOP);
         p.text(label, panelX, y);
